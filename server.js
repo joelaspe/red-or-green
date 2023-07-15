@@ -26,12 +26,37 @@ app.get('/restaurant', async (req, res) => {
     }
 });
 
+app.get('/users', async (req, res) => {
+    try {
+        const response = await pool.query('SELECT id, email FROM users ORDER BY id ASC');
+        res.status(200).json(response.rows);
+    } catch (error) {
+        console.log(error);
+        res.status(500).send('Internal Server Error');
+    }
+});
+
 
 /********* GET ONE ************/
 app.get('/restaurant/:id', async (req, res) => {
     const { id } = req.params;
     try {
         const response = await pool.query('SELECT * FROM restaurant WHERE id = $1 ORDER BY id ASC', [id]);
+        if(response.rowCount < 1) {
+            res.status(404).send('ID not found');
+        } else {
+            res.status(200).json(response.rows[0]);
+        }
+    } catch (error) {
+        console.error(error);
+        res.status(500).send('Internal Server Error');
+    }
+});
+
+app.get('/users/:id', async (req, res) => {
+    const { id } = req.params;
+    try {
+        const response = await pool.query('SELECT id, email FROM users WHERE id = $1 ORDER BY id ASC', [id]);
         if(response.rowCount < 1) {
             res.status(404).send('ID not found');
         } else {
@@ -55,11 +80,37 @@ app.post('/restaurant', async (req, res) => {
     }
 });
 
+app.post('/users', async (req, res) => {
+    try {
+        const { email, password } = req.body
+        const response = await pool.query('INSERT INTO users (email, password) VALUES ($1, crypt($2, gen_salt(\'bf\'))) RETURNING (email, id)', [email, password]);        
+        res.status(201).json(response.rows[0]);
+    } catch (error) {
+        console.error(error);
+        res.status(500).send('Internal Server Error');
+    }
+});
+
 /******* DELETE ONE **************/
 app.delete('/restaurant/:id', async (req, res) => {
     const { id } = req.params;
     try {
         const response = await pool.query('DELETE FROM restaurant WHERE id = $1 RETURNING *', [id]);
+        if(response.rowCount === 0) {
+            res.status(404).send('ID Not Found');
+        } else {
+            res.status(200).json(response.rows[0]);
+        }
+    } catch (error) {
+        console.error(error);
+        res.status(500).send('Internal Server Error');
+    }
+});
+
+app.delete('/users/:id', async (req, res) => {
+    const { id } = req.params;
+    try {
+        const response = await pool.query('DELETE FROM users WHERE id = $1 RETURNING (email, id)', [id]);
         if(response.rowCount === 0) {
             res.status(404).send('ID Not Found');
         } else {
