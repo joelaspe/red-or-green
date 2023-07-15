@@ -105,7 +105,7 @@ app.get('/users/:id', async (req, res) => {
 app.get('/ratings/:id', async (req, res) => {
     const { id } = req.params;
     try {
-        const response = await pool.query('SELECT ratings.id, ratings.user_id, users.email, ratings.restaurant_id, ratings.red_or_green, ratings.rating, ratings.price, ratings.comment, restaurant.id, restaurant.name FROM ratings JOIN restaurant ON ratings.restaurant_id = restaurant.id JOIN users ON users.id = ratings.user_id WHERE ratings.id = $1 ORDER BY ratings.id ASC', [id]);
+        const response = await pool.query('SELECT ratings.id as rating_id, ratings.user_id, users.email, ratings.restaurant_id, ratings.red_or_green, ratings.rating, ratings.price, ratings.comment, restaurant.id, restaurant.name FROM ratings JOIN restaurant ON ratings.restaurant_id = restaurant.id JOIN users ON users.id = ratings.user_id WHERE ratings.id = $1 ORDER BY ratings.id ASC', [id]);
         if(response.rowCount < 1) {
             res.status(404).send('ID not found');
         } else {
@@ -221,11 +221,33 @@ app.put('/restaurant/:id', async (req, res) => {
     } 
 }); 
 
+app.put('/ratings/:id', async (req, res) => {
+    const { id } = req.params;
+    const body = req.body;
+    try {
+        let sets = [];
+        for (let key in body) {
+            sets.push(format('%I = %L', key, body[key]));
+        }
+        let setStrings = sets.join(',');
+        const SQLString = format('UPDATE ratings SET %s WHERE id = %L RETURNING *', setStrings, id);
+        const response = await pool.query(SQLString);
+        if(response.rows.length < 1) {
+            res.status(404).send('ID Not Found');
+        } else {
+            res.status(200).json(response.rows[0]);
+        }
+    } catch (error) {
+        console.error(error);
+        res.status(500).send('Internal Server Error');
+    } 
+}); 
+//TODO: add PUT route for users to allow changing passwords and email, but not required for MVP right now. Will require figuring out how to incorporate encryption for the passwords
+
+
 app.listen(process.env.PORT, () => {
     console.log(`Listening on port ${process.env.PORT}`);
 })
-
-//TODO: add PUT route for users to allow changing passwords and email, but not required for MVP right now
 
 
 
