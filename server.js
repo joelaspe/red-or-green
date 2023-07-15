@@ -36,6 +36,24 @@ app.get('/users', async (req, res) => {
     }
 });
 
+/* No GET ALL route for ratings, but can GET ALL route for a specific restaurant or GET ALL ratings by a specific user so /ratings/restaurant/:id or /ratings/users/:id */
+
+app.get('/ratings/restaurant/:id', async (req, res) => {
+    const { id } = req.params;
+    try {
+        //const response = await pool.query('SELECT (ratings.id, ratings.user_id, ratings.restaurant_id, ratings.red_or_green, ratings.rating, ratings.price, ratings.comment, users.email, users.id, restaurant.id, restaurant.name) FROM ratings JOIN restaurant ON restaurant.id = $1 JOIN users ON users.id = ratings.user_id ORDER BY ratings.id ASC', [id]);
+        const response = await pool.query('SELECT ratings.id, ratings.user_id, users.email, ratings.restaurant_id, ratings.red_or_green, ratings.rating, ratings.price, ratings.comment, restaurant.id, restaurant.name FROM ratings JOIN restaurant ON ratings.restaurant_id = restaurant.id JOIN users ON users.id = ratings.user_id WHERE restaurant.id = $1 ORDER BY ratings.id ASC', [id]);
+        if(response.rowCount < 1) {
+            res.status(404).send('ID not found');
+        } else {
+            res.status(200).json(response.rows);
+        }
+    } catch (error) {
+        console.error(error);
+        res.status(500).send('Internal Server Error');
+    }
+});
+
 
 /********* GET ONE ************/
 app.get('/restaurant/:id', async (req, res) => {
@@ -149,7 +167,7 @@ app.listen(process.env.PORT, () => {
     console.log(`Listening on port ${process.env.PORT}`);
 })
 
-
+//TODO: add PUT route for users to allow changing passwords and email, but not required for MVP right now
 
 
 
