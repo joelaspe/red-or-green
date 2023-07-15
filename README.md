@@ -9,16 +9,16 @@ Red or Green? -- That is the state question of New Mexico, meaning do you want r
 - Run `psql -d red_or_green -f ./db/migration.sql`
 - Run `psql -d red_or_green -f ./db/seed.sql` to seed the database
 - Enter the psql cli as postgres or a superuser `psql -d red_or_green`
-- Ensure the data was migrated to the database `SELECT * FROM restaurant;` `SELECT * FROM ratings WHERE id = 1;`
+- Ensure the data was migrated to the database `SELECT * FROM restaurant;` `SELECT * FROM ratings WHERE id = 1;` `SELECT * FROM users WHERE id = 1;`
 - Create a user in postgres 
-  - `CREATE USER firearm_check_api PASSWORD '<password>';`
+  - `CREATE USER red_or_green_api PASSWORD '<password>';`
 - Grant priveleges to the new user 
-  - `GRANT SELECT, INSERT, UPDATE, DELETE on states, checks TO firearm_checks_api;` 
-  - `GRANT USAGE on checks_id_seq, states_id_seq TO firearm_checks_api;`
+  - `GRANT SELECT, INSERT, UPDATE, DELETE on restaurant, ratings, users TO red_or_green_api;`
+  - `GRANT USAGE on ratings_id_seq, restaurant_id_seq, users_id_seq TO red_or_green_api;`
 - Install NPM dependencies `npm install`
 - Rename .env.template to .env and add the port number and a valid connection string 
   - `PORT=3000`
-  - `DATABASE_URL=postgres://firearm_checks_api:firearm_checks_api@localhost:5432/firearm_checks`
+  - `DATABASE_URL=postgres://red_or_green_api:<password>@localhost:5432/red_or_green`
 - Run the server `npm run start`
 ## Deploying to Render
 - Ensure the project is pushed to your Github account. 
