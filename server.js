@@ -41,8 +41,8 @@ app.get('/users', async (req, res) => {
 app.get('/ratings/restaurant/:id', async (req, res) => {
     const { id } = req.params;
     try {
-        //const response = await pool.query('SELECT (ratings.id, ratings.user_id, ratings.restaurant_id, ratings.red_or_green, ratings.rating, ratings.price, ratings.comment, users.email, users.id, restaurant.id, restaurant.name) FROM ratings JOIN restaurant ON restaurant.id = $1 JOIN users ON users.id = ratings.user_id ORDER BY ratings.id ASC', [id]);
-        const response = await pool.query('SELECT ratings.id, ratings.user_id, users.email, ratings.restaurant_id, ratings.red_or_green, ratings.rating, ratings.price, ratings.comment, restaurant.id, restaurant.name FROM ratings JOIN restaurant ON ratings.restaurant_id = restaurant.id JOIN users ON users.id = ratings.user_id WHERE restaurant.id = $1 ORDER BY ratings.id ASC', [id]);
+        
+        const response = await pool.query('SELECT ratings.id as rating_id, ratings.user_id, users.email, ratings.restaurant_id, ratings.red_or_green, ratings.rating, ratings.price, ratings.comment, restaurant.id, restaurant.name FROM ratings JOIN restaurant ON ratings.restaurant_id = restaurant.id JOIN users ON ratings.user_id = users.id WHERE restaurant.id = $1 ORDER BY ratings.id ASC', [id]);
         if(response.rowCount < 1) {
             res.status(404).send('ID not found');
         } else {
@@ -54,6 +54,20 @@ app.get('/ratings/restaurant/:id', async (req, res) => {
     }
 });
 
+app.get('/ratings/users/:id', async (req, res) => {
+    const { id } = req.params;
+    try {
+        const response = await pool.query('SELECT ratings.id as rating_id, ratings.user_id, users.email, ratings.restaurant_id, ratings.red_or_green, ratings.rating, ratings.price, ratings.comment, restaurant.id, restaurant.name FROM ratings JOIN restaurant ON ratings.restaurant_id = restaurant.id JOIN users ON users.id = ratings.user_id WHERE users.id = $1 ORDER BY ratings.id ASC', [id]);
+        if(response.rowCount < 1) {
+            res.status(404).send('ID not found');
+        } else {
+            res.status(200).json(response.rows);
+        }
+    } catch (error) {
+        console.error(error);
+        res.status(500).send('Internal Server Error');
+    }
+});
 
 /********* GET ONE ************/
 app.get('/restaurant/:id', async (req, res) => {
@@ -75,6 +89,21 @@ app.get('/users/:id', async (req, res) => {
     const { id } = req.params;
     try {
         const response = await pool.query('SELECT id, email FROM users WHERE id = $1 ORDER BY id ASC', [id]);
+        if(response.rowCount < 1) {
+            res.status(404).send('ID not found');
+        } else {
+            res.status(200).json(response.rows[0]);
+        }
+    } catch (error) {
+        console.error(error);
+        res.status(500).send('Internal Server Error');
+    }
+});
+
+app.get('/ratings/:id', async (req, res) => {
+    const { id } = req.params;
+    try {
+        const response = await pool.query('SELECT ratings.id, ratings.user_id, users.email, ratings.restaurant_id, ratings.red_or_green, ratings.rating, ratings.price, ratings.comment, restaurant.id, restaurant.name FROM ratings JOIN restaurant ON ratings.restaurant_id = restaurant.id JOIN users ON users.id = ratings.user_id WHERE ratings.id = $1 ORDER BY ratings.id ASC', [id]);
         if(response.rowCount < 1) {
             res.status(404).send('ID not found');
         } else {
@@ -108,6 +137,18 @@ app.post('/users', async (req, res) => {
         res.status(500).send('Internal Server Error');
     }
 });
+
+app.post('/ratings', async (req, res) => {
+    try {
+        const { red_or_green, price, rating, comment, user_id, restaurant_id } = req.body
+        const response = await pool.query('INSERT INTO ratings (red_or_green, price, rating, comment, user_id, restaurant_id) VALUES ($1, $2, $3, $4, $5, $6) RETURNING *', [red_or_green, price, rating, comment, user_id, restaurant_id ]);        
+        res.status(201).json(response.rows[0]);
+    } catch (error) {
+        console.error(error);
+        res.status(500).send('Internal Server Error');
+    }
+});
+
 
 /******* DELETE ONE **************/
 app.delete('/restaurant/:id', async (req, res) => {
