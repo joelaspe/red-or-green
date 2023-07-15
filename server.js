@@ -15,6 +15,8 @@ app.use(cors());
 
 app.use(express.json());
 
+
+//TODO: add data validation for all routes
 /********* GET ALL **********/
 app.get('/restaurant', async (req, res) => {
     try {
@@ -170,6 +172,21 @@ app.delete('/users/:id', async (req, res) => {
     const { id } = req.params;
     try {
         const response = await pool.query('DELETE FROM users WHERE id = $1 RETURNING (email, id)', [id]);
+        if(response.rowCount === 0) {
+            res.status(404).send('ID Not Found');
+        } else {
+            res.status(200).json(response.rows[0]);
+        }
+    } catch (error) {
+        console.error(error);
+        res.status(500).send('Internal Server Error');
+    }
+});
+
+app.delete('/ratings/:id', async (req, res) => {
+    const { id } = req.params;
+    try {
+        const response = await pool.query('DELETE FROM ratings WHERE id = $1 RETURNING *', [id]);
         if(response.rowCount === 0) {
             res.status(404).send('ID Not Found');
         } else {
