@@ -2,8 +2,7 @@ const Restaurant = ({ restaurant, getRatingsData }) => {
     
     
     const handleClick = (e) => {
-        console.log(e.currentTarget.id)
-        getRatingsData(e.currentTarget.id);
+        getRatingsData(e.currentTarget.id, restaurant.name);
     }
     // FIXME: add formatting to the phone number
     // TODO: add color change for red or green or christmas preferences

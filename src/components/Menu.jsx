@@ -1,8 +1,8 @@
-const Menu = (loggedIn) => {
+const Menu = ({loggedIn}) => {
     if(loggedIn !== null) {
         return (
             <div className="menu-container">
-                <h1>{"Logged in as: " + loggedIn.loggedIn}</h1>
+                <h1>{"Logged in as: " + loggedIn.email}</h1>
             </div>    
         )
     } else {

@@ -9,7 +9,7 @@ function App() {
   const [ratings, setRatings] = useState([]);
   const [restaurants, setRestaurants] = useState([]);
   // FIXME: Implement actual login instead of hard-coded user
-  const [loggedIn, setLoggedIn] = useState('albertalonzo@gmail.com');
+  const [loggedIn, setLoggedIn] = useState({email: 'albertalonzo@gmail.com', id: 1});
 
   const getRestaurantData = async () => {
     //TODO: make api URL customizable (maybe dotenv npm module)
@@ -24,12 +24,17 @@ function App() {
   }, []);
 
   // loads ratings if one restaurant is selected by the user
-  const getRatingsData = async (id) => {
+  const getRatingsData = async (id, name) => {
     //TODO: make api URL customizable (maybe dotenv npm module)
-    const res = await fetch(`http://localhost:3000/ratings/restaurant/${id}`);
-    const data = await res.json();
-    setRatings(data);
-  }
+      const res = await fetch(`http://localhost:3000/ratings/restaurant/${id}`);
+      if(res.status === 200) {
+        const data = await res.json();
+        setRatings(data);
+      } else {
+        setRatings([{"name": name, "restaurant_id": id, "email": "nobody", "comment": "No records exist yet, create one now!", "rating": null, "price": null, "red_or_green": null }])
+      }
+
+    }
     
   if(restaurants.length === 0) {
     return <h1> Loading </h1>
@@ -39,7 +44,7 @@ function App() {
         <Header setRatings={setRatings} loggedIn={loggedIn} />
         <div className="restaurants-container">
           <div className="column-left">Left Column</div>
-          {(ratings.length === 0) ? <Restaurants className="column-restaurants" restaurants={restaurants} getRatingsData={getRatingsData} /> : <Ratings className="column-restaurants" ratings={ratings} /> }
+          {(ratings.length === 0) ? <Restaurants className="column-restaurants" restaurants={restaurants} getRatingsData={getRatingsData} /> : <Ratings className="column-restaurants" ratings={ratings} loggedIn={loggedIn} getRatingsData={getRatingsData} /> }
           <div className="column-right">Right Column</div>
         </div>
       </>
