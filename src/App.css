@@ -1,42 +1,155 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+/* http://meyerweb.com/eric/tools/css/reset/ 
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+body {
+	line-height: 1;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+
+/****** HEADER ***********/
+.header {
+	background-color: darkseagreen;
+	padding: 0px 0px;
+	display: flex;
+	text-align: center;
+	font-size: larger;
+	justify-content: space-between;
+	align-items: flex-end;
+	
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+#title {
+	font-size: 6rem;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
+
+/******* MENU ************/
+.menu-container {
+	color: #fff;
+	background-color: #5995DA;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	
+	
 }
 
-.card {
-  padding: 2em;
+.menu {
+	border: 1px solid #fff; /* for debugging */
+	margin: 20px 20px 20px 20px;
+	width: 20dvw;
 }
 
-.read-the-docs {
-  color: #888;
+/**** MAIN WINDOW **********/
+
+.restaurants-container {
+	
+	padding: 0px 0;
+	display: flex;
+	width: 100dvw;
+	justify-content: center;
 }
+
+.column-left {
+	background-color: orange;
+	padding: 20px 0;
+	display: flex;
+	width: 10dvw;
+	border: 1px solid gray; /* for debugging */
+}
+
+
+.column-restaurants {
+	background-color: yellowgreen;
+	padding: 0px 0;
+	display: flex;
+	flex-wrap: wrap;
+	width: 80dvw;
+	text-align: center;
+	justify-content: space-between;
+	border: 1px solid gray; /* for debugging */
+}
+
+.restaurant {
+	background-color: magenta;
+	font-size: 1.1em;
+	padding: 20px 0;
+	margin: 20px 20px 20px 20px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	text-align: left;
+	width: 20dvw;
+	border: 1px solid gray; /* for debugging */
+}
+
+.column-ratings {
+	background-color: darkcyan;
+	padding: 0px 0;
+	display: flex;
+	flex-direction: column;
+	width: 80dvw;
+	text-align: center;
+	border: 1px solid gray; /* for debugging */
+}
+
+
+.rating {
+	background-color: brown;
+	font-size: 1.1em;
+	padding: 20px 0;
+	align-items: center;
+	justify-content: space-around;
+	width: 80dvw;
+	border: 1px solid gray; /* for debugging */
+}
+
+.column-right {
+	background-color: violet;
+	padding: 20px 0;
+	display: flex;
+	width: 10dvw;
+	border: 1px solid gray; /* for debugging */
+}
+

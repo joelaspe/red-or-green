@@ -4,6 +4,7 @@ import express from 'express';
 const app = express();
 
 import cors from 'cors';
+app.use(cors());
 
 import pg from 'pg';
 const { Pool } = pg;
@@ -11,9 +12,10 @@ const pool = new Pool({ connectionString: process.env.DATABASE_URL });
 
 import format from 'pg-format';
 
-app.use(cors());
 
 app.use(express.json());
+
+
 
 
 //TODO: add data validation for all routes
@@ -117,6 +119,7 @@ app.get('/ratings/:id', async (req, res) => {
     }
 });
 
+
 /******* CREATE ONE **********/
 app.post('/restaurant', async (req, res) => {
     try {
@@ -140,6 +143,8 @@ app.post('/users', async (req, res) => {
     }
 });
 
+
+//TODO: Add timestamp to rating creation, will require modifying database
 app.post('/ratings', async (req, res) => {
     try {
         const { red_or_green, price, rating, comment, user_id, restaurant_id } = req.body

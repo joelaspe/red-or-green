@@ -19,6 +19,8 @@ Red or Green? -- That is the state question of New Mexico, meaning do you want r
 - Rename .env.template to .env and add the port number and a valid connection string 
   - `PORT=3000`
   - `DATABASE_URL=postgres://red_or_green_api:<password>@localhost:5432/red_or_green`
+
+
 - Run the server `npm run start`
 ## Deploying to Render
 - Ensure the project is pushed to your Github account. 
