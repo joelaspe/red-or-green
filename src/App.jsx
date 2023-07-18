@@ -31,31 +31,19 @@ function App() {
     setRatings(data);
   }
     
-  //FIXME: Use ternary below the menu item
   if(restaurants.length === 0) {
     return <h1> Loading </h1>
-  } else if(ratings.length === 0) {  // home screen, show the restaurants until one is clicked which will show the ratings page for that restaurant
+  } else { 
     return (
       <>
         <Header setRatings={setRatings} />
         <div className="restaurants-container">
           <div className="column-left">Left Column</div>
-          <Restaurants className="column-restaurants" restaurants={restaurants} getRatingsData={getRatingsData} />
+          {(ratings.length === 0) ? <Restaurants className="column-restaurants" restaurants={restaurants} getRatingsData={getRatingsData} /> : <Ratings className="column-restaurants" ratings={ratings} /> }
           <div className="column-right">Right Column</div>
         </div>
       </>
     ) 
-  } else {  // ratings page when ratings variable is filled in, happens when user clicks on a restaurant
-    return (
-      <>
-        <Header setRatings={setRatings} />
-        <div className="restaurants-container">
-          <div className="column-left">Left Column</div>
-          <Ratings className="column-restaurants" ratings={ratings} />
-          <div className="column-right">Right Column</div>
-        </div>
-      </>
-    )
   }
 }
 
