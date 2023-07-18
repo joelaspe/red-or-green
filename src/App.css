@@ -51,27 +51,29 @@ table {
 .header {
 	background-color: darkseagreen;
 	padding: 0px 0px;
+	height: 125px;
 	display: flex;
 	text-align: center;
 	font-size: larger;
+	font-family: 'Sarabun', sans-serif;
 	justify-content: space-between;
 	align-items: flex-end;
 	
 }
 
 #title {
-	font-size: 6rem;
+	font-size: 4rem;
+	font-family: 'Dancing Script', cursive;
 }
 
 
 /******* MENU ************/
 .menu-container {
-	color: #fff;
-	background-color: #5995DA;
 	display: flex;
-	flex-direction: column;
+	flex-direction: column-reverse;
 	justify-content: space-between;
 	height: 3.5rem;
+
 }
 
 .menu {
@@ -83,36 +85,40 @@ table {
 /**** MAIN WINDOW **********/
 
 .restaurants-container {
-	
+	background-image: url("/public/images/red-green_background.jpg");
+	background-size: 50dvw;
 	padding: 0px 0;
 	display: flex;
 	width: 100dvw;
 	justify-content: center;
+
 }
 
 .column-left {
-	background-color: orange;
+
 	padding: 20px 0;
 	display: flex;
 	width: 10dvw;
-	border: 1px solid gray; /* for debugging */
 }
 
 
 .column-restaurants {
-	background-color: yellowgreen;
+	
+	
+	background-position: top;
 	padding: 0px 0;
 	display: flex;
 	flex-wrap: wrap;
 	width: 80dvw;
 	text-align: center;
 	justify-content: space-between;
-	border: 1px solid gray; /* for debugging */
+
 }
 
 .restaurant {
-	background-color: magenta;
+	background-color: rgba(238,255,204,.5);
 	font-size: 1.1em;
+	font-family: 'Sarabun', sans-serif;
 	padding: 20px 0;
 	margin: 20px 20px 20px 20px;
 	display: flex;
@@ -120,7 +126,9 @@ table {
 	justify-content: space-between;
 	text-align: left;
 	width: 20dvw;
-	border: 1px solid gray; /* for debugging */
+	border: 1px solid gainsboro; 
+	border-radius: 30px; 
+
 }
 
 .column-ratings {
@@ -149,10 +157,10 @@ table {
 }
 
 .column-right {
-	background-color: violet;
+
 	padding: 20px 0;
 	display: flex;
 	width: 10dvw;
-	border: 1px solid gray; /* for debugging */
+
 }
 

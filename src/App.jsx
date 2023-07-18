@@ -43,9 +43,9 @@ function App() {
       <>
         <Header setRatings={setRatings} loggedIn={loggedIn} />
         <div className="restaurants-container">
-          <div className="column-left">Left Column</div>
+          <div className="column-left"></div>
           {(ratings.length === 0) ? <Restaurants className="column-restaurants" restaurants={restaurants} getRatingsData={getRatingsData} /> : <Ratings className="column-restaurants" ratings={ratings} loggedIn={loggedIn} getRatingsData={getRatingsData} /> }
-          <div className="column-right">Right Column</div>
+          <div className="column-right"></div>
         </div>
       </>
     ) 
