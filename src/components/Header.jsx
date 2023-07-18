@@ -2,7 +2,7 @@ import Menu from './Menu';
 
 
 
-const Header = ({setRatings}) => {
+const Header = ({setRatings, loggedIn}) => {
     const handleClick = () => {
         setRatings([]);
     }
@@ -13,7 +13,7 @@ const Header = ({setRatings}) => {
                 <h1>Home</h1>
             </div>
             <h1 id="title">Red or Green?</h1>
-            <Menu />
+            <Menu loggedIn={loggedIn} />
         </div>
     )
 }

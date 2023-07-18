@@ -133,6 +133,10 @@ table {
 	border: 1px solid gray; /* for debugging */
 }
 
+#rating-title {
+	font-size: 3rem;
+	padding: 20px 20px;
+}
 
 .rating {
 	background-color: brown;

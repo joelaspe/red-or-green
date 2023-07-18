@@ -8,6 +8,8 @@ function App() {
   
   const [ratings, setRatings] = useState([]);
   const [restaurants, setRestaurants] = useState([]);
+  // FIXME: Implement actual login instead of hard-coded user
+  const [loggedIn, setLoggedIn] = useState('albertalonzo@gmail.com');
 
   const getRestaurantData = async () => {
     //TODO: make api URL customizable (maybe dotenv npm module)
@@ -16,10 +18,8 @@ function App() {
     setRestaurants(data);
     
   }
-  console.log("Rendering App.jsx");
   // useEffect() used for loading data from the API
   useEffect(() => {
-    console.log("Entering useEffect for currentRating again");
     getRestaurantData();
   }, []);
 
@@ -36,7 +36,7 @@ function App() {
   } else { 
     return (
       <>
-        <Header setRatings={setRatings} />
+        <Header setRatings={setRatings} loggedIn={loggedIn} />
         <div className="restaurants-container">
           <div className="column-left">Left Column</div>
           {(ratings.length === 0) ? <Restaurants className="column-restaurants" restaurants={restaurants} getRatingsData={getRatingsData} /> : <Ratings className="column-restaurants" ratings={ratings} /> }
