@@ -1,11 +1,10 @@
+//const API_URL = 'https://red-or-green-ratings.onrender.com';
+
 import { useState, useEffect } from 'react'
 import './App.css'
 import Header from './components/Header'
 import Restaurants from './components/Restaurants'
 import Ratings from './components/Ratings'
-
-import 'dotenv/config';
-dotenv.config();
 
 function App() {
   

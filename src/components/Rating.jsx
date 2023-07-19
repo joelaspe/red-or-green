@@ -1,3 +1,5 @@
+//const API_URL = 'https://red-or-green-ratings.onrender.com';
+
 import EditRating from './EditRating';
 import {useState} from 'react';
 

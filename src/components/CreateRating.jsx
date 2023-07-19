@@ -1,3 +1,5 @@
+//const API_URL = 'https://red-or-green-ratings.onrender.com';
+
 import {useState} from 'react';
 
 const CreateRating = ({ratings, loggedIn, getRatingsData, setCreateFormActive}) => {
