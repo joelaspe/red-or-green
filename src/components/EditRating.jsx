@@ -19,7 +19,7 @@ const EditRating = ({rating, getRatingsData, setEditActive}) => {
                                         "price": price })
                 }
             console.log(rating);
-            const apiString =  API_URL + rating.rating_id};
+            const apiString =  API_URL + rating.rating_id;
             console.log(apiString);
             const response = await fetch(apiString, requestOptions);
             const data = await response.json();
