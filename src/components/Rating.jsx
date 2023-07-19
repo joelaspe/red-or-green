@@ -1,4 +1,4 @@
-//const API_URL = 'https://red-or-green-ratings.onrender.com';
+const API_URL = 'https://red-or-green-ratings.onrender.com/';
 
 import EditRating from './EditRating';
 import {useState} from 'react';
@@ -34,7 +34,8 @@ const Rating = ({rating, loggedIn, getRatingsData, restaurantName}) => {
       <h3>Red or Green? {rating.red_or_green}</h3>
       <h3>Price Paid: ${rating.price}</h3>
       {(loggedIn && editActive) ?  <EditRating rating={rating} getRatingsData={getRatingsData} setEditActive={setEditActive} /> : null}
-      {(loggedIn && !editActive) ? <><button onClick={handleEditClick}>Click to Edit</button><button onClick={handleDeleteClick}>Click to Delete Post</button> </> : <h1>Login to edit or delete rating</h1>}
+      {(loggedIn && !editActive) ? <><button className="edit-delete-btn" onClick={handleEditClick}>Edit Post</button><button className="edit-delete-btn" onClick={handleDeleteClick}>Delete Post</button> </> : null }
+      {(!loggedIn) ? <h1>Login to edit or delete rating</h1> : null }
     </div>
  )
  

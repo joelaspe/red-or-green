@@ -16,7 +16,7 @@ const Ratings = ({ ratings, loggedIn, getRatingsData }) => {
         return ( 
         <>
             <h1 id="rating-title">No ratings on record for {ratings[0].name}</h1>
-            {(loggedIn) ? <button onClick={handleClick}>Create new post</button> : null}
+            {(loggedIn) ? <button className="new-record-btn" onClick={handleClick}>Create new post</button> : null}
         </>
         )
     }
@@ -24,7 +24,7 @@ const Ratings = ({ ratings, loggedIn, getRatingsData }) => {
     return (
         <div className="column-ratings">
             <h1 id="rating-title">{ratings[0].name}</h1>
-            {(loggedIn)? <button onClick={handleClick}>Create new post</button> : null}
+            {(loggedIn)? <button className="new-record-btn" onClick={handleClick}>Create new post</button> : null}
             {ratings.map((rating) => (
                 <Rating rating={rating} loggedIn={loggedIn} getRatingsData={getRatingsData} restaurantName={ratings[0].name} key={"rating-" + rating.rating_id} />
             ))}

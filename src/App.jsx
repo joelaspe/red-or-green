@@ -1,4 +1,4 @@
-//const API_URL = 'https://red-or-green-ratings.onrender.com';
+const API_URL = 'https://red-or-green-ratings.onrender.com/';
 
 import { useState, useEffect } from 'react'
 import './App.css'
