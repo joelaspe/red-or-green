@@ -26,7 +26,7 @@ const Ratings = ({ ratings, loggedIn, getRatingsData }) => {
             <h1 id="rating-title">{ratings[0].name}</h1>
             {(loggedIn)? <button onClick={handleClick}>Create new post</button> : null}
             {ratings.map((rating) => (
-                <Rating rating={rating} loggedIn={loggedIn} getRatingsData={getRatingsData} key={"rating-" + rating.rating_id} />
+                <Rating rating={rating} loggedIn={loggedIn} getRatingsData={getRatingsData} restaurantName={ratings[0].name} key={"rating-" + rating.rating_id} />
             ))}
         </div>
     )

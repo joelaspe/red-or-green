@@ -4,6 +4,9 @@ import Header from './components/Header'
 import Restaurants from './components/Restaurants'
 import Ratings from './components/Ratings'
 
+import 'dotenv/config';
+dotenv.config();
+
 function App() {
   
   const [ratings, setRatings] = useState([]);
@@ -13,7 +16,7 @@ function App() {
 
   const getRestaurantData = async () => {
     //TODO: make api URL customizable (maybe dotenv npm module)
-    const res = await fetch('http://localhost:3000/restaurant');
+    const res = await fetch(`${API_URL}restaurant`);
     const data = await res.json();
     setRestaurants(data);
     
@@ -26,7 +29,7 @@ function App() {
   // loads ratings if one restaurant is selected by the user
   const getRatingsData = async (id, name) => {
     //TODO: make api URL customizable (maybe dotenv npm module)
-      const res = await fetch(`http://localhost:3000/ratings/restaurant/${id}`);
+      const res = await fetch(`${API_URL}ratings/restaurant/${id}`);
       if(res.status === 200) {
         const data = await res.json();
         setRatings(data);

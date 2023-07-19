@@ -19,24 +19,22 @@ Red or Green? -- That is the state question of New Mexico, meaning do you want r
 - Rename .env.template to .env and add the port number and a valid connection string 
   - `PORT=3000`
   - `DATABASE_URL=postgres://red_or_green_api:<password>@localhost:5432/red_or_green`
-
+\i 
 
 - Run the server `npm run start`
 ## Deploying to Render
 - Ensure the project is pushed to your Github account. 
 - Create a [Render](https://www.render.com) account
 - From the dashboard, create a new PostgreSQL instance. Copy both the External Database URL and the PSQL Command
-- From the dashboard, create a new Web Service. Connect your Github repository to the new Render Web Service. Set bu
-ild command `npm install`, start command `npm start` Make sure to enter an environment variable with SSL flag set at
- the end 
+- From the dashboard, create a new Web Service. Connect your Github repository to the new Render Web Service. Set build command `npm install && npm run build`, start command `npm start` Make sure to enter an environment variable with SSL flag set at the end 
   - key: `DATABASE_URL` Value: `<copied external database URL>?ssl=true` 
-- Back on your local machine terminal, go to the db folder `cd fb` and copy the PSQL command from Render PostgreSQL.
+- Back on your local machine terminal, go to the db folder `cd db` and copy the PSQL command from Render PostgreSQL.
  You should now be connected to the remote database, and see the database name on the PSQL terminal. `firearm_checks
 =>`
 - Migrate and seed the database (could take a while)
   - `\i migration.sql`
   - `\i seed.sql`
-  - Test the seeding: `SELECT permit, month_year FROM checks WHERE state_id = 1;`
+  - Test the seeding: `SELECT * FROM restaurant;`
 - Test the deployment worked, navigate to the homepage provided by Render.
 
 # Questions / Feedback / Improvements

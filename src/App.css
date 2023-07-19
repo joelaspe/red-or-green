@@ -49,7 +49,8 @@ table {
 
 /****** HEADER ***********/
 .header {
-	background-color: darkseagreen;
+	/* background-color: darkseagreen; */
+	background-image: linear-gradient(to right, lightgreen, red);
 	padding: 0px 0px;
 	height: 125px;
 	display: flex;
@@ -90,6 +91,7 @@ table {
 	padding: 0px 0;
 	display: flex;
 	width: 100dvw;
+	height: 50dvw;
 	justify-content: center;
 
 }
@@ -132,13 +134,13 @@ table {
 }
 
 .column-ratings {
-	background-color: darkcyan;
+	
 	padding: 0px 0;
 	display: flex;
 	flex-direction: column;
 	width: 80dvw;
 	text-align: center;
-	border: 1px solid gray; /* for debugging */
+	
 }
 
 #rating-title {
@@ -147,8 +149,9 @@ table {
 }
 
 .rating {
-	background-color: brown;
+	background-color: rgba(238,255,204,.5);
 	font-size: 1.1em;
+	font-family: 'Sarabun', sans-serif;
 	padding: 20px 0;
 	align-items: center;
 	justify-content: space-around;

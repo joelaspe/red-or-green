@@ -1,7 +1,7 @@
 import EditRating from './EditRating';
 import {useState} from 'react';
 
-const Rating = ({rating, loggedIn, getRatingsData}) => {
+const Rating = ({rating, loggedIn, getRatingsData, restaurantName}) => {
 
   const [editActive, setEditActive] = useState(false);
 
@@ -15,14 +15,15 @@ const Rating = ({rating, loggedIn, getRatingsData}) => {
         method: 'DELETE',
         headers: { 'Content-Type': 'application/json' 
       }};
-      const apiString = 'http://localhost:3000/' + 'ratings/' + rating.rating_id + '/';
+      const apiString = API_URL + 'ratings/' + rating.rating_id + '/';
       const response = await fetch(apiString, requestOptions)
       const data = await response.json();
-      console.log(data);
-
+      getRatingsData(rating.restaurant_id, restaurantName)
     }
     deleteRecord();
+  
   }
+  
   return (
     <div className="rating">
       <h1>{rating.email} posted..</h1>   
@@ -34,6 +35,7 @@ const Rating = ({rating, loggedIn, getRatingsData}) => {
       {(loggedIn && !editActive) ? <><button onClick={handleEditClick}>Click to Edit</button><button onClick={handleDeleteClick}>Click to Delete Post</button> </> : <h1>Login to edit or delete rating</h1>}
     </div>
  )
+ 
 }
 
 export default Rating;

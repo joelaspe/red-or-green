@@ -18,7 +18,7 @@ const CreateRating = ({ratings, loggedIn, getRatingsData, setCreateFormActive}) 
                                         "rating": ratingValue,
                                         "price": price })
                 }
-            const apiString =  'http://localhost:3000/ratings/';
+            const apiString =  `${API_URL}ratings/`;
             console.log(apiString);
             const response = await fetch(apiString, requestOptions);
             const data = await response.json();
