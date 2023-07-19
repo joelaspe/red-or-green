@@ -74,6 +74,7 @@ table {
 	flex-direction: column-reverse;
 	justify-content: space-between;
 	height: 3.5rem;
+	margin: 3px 0px;
 
 }
 

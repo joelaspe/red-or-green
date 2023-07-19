@@ -14,11 +14,9 @@ function App() {
   const [loggedIn, setLoggedIn] = useState({email: 'albertalonzo@gmail.com', id: 1});
 
   const getRestaurantData = async () => {
-    //TODO: make api URL customizable (maybe dotenv npm module)
     const res = await fetch(`${API_URL}restaurant`);
     const data = await res.json();
     setRestaurants(data);
-    
   }
   // useEffect() used for loading data from the API
   useEffect(() => {
@@ -27,7 +25,6 @@ function App() {
 
   // loads ratings if one restaurant is selected by the user
   const getRatingsData = async (id, name) => {
-    //TODO: make api URL customizable (maybe dotenv npm module)
       const res = await fetch(`${API_URL}ratings/restaurant/${id}`);
       if(res.status === 200) {
         const data = await res.json();
@@ -55,3 +52,5 @@ function App() {
 }
 
 export default App
+
+

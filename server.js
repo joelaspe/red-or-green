@@ -15,7 +15,7 @@ import format from 'pg-format';
 
 app.use(express.json());
 
-
+app.use(express.static('./dist'));
 
 
 //TODO: add data validation for all routes
